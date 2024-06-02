@@ -1,0 +1,49 @@
+﻿@model Libs.ViewModels.VePhimViewModel
+
+@{
+    ViewData["Title"] = "Tạo Mới Vé Phim";
+}
+
+<h2>Tạo Mới Vé Phim</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label>Thời Gian:</label>
+        <input asp-for="ThoiGian" class="form-control" type="date"/>
+        <span asp-validation-for="ThoiGian" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Phòng Phim:</label>
+        <select asp-for="PhongPhimId" class="form-control" asp-items="@(new SelectList(Model.PhongPhims, "Id", "SoPhong"))">
+            <option value="">-- Chọn phòng phim --</option>
+        </select>
+        <span asp-validation-for="PhongPhimId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Khuyến Mãi:</label>
+        <select asp-for="KhuyenMaiGiaVeId" class="form-control" asp-items="@(new SelectList(Model.KhuyenMaiGiaVes, "Id", "MieuTa"))">
+            <option value="">-- Chọn khuyến mãi --</option>
+        </select>
+        <span asp-validation-for="KhuyenMaiGiaVeId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Phim:</label>
+        <select asp-for="PhimId" class="form-control" asp-items="@(new SelectList(Model.Phims, "Id", "TenPhim"))">
+            <option value="">-- Chọn Phim --</option>
+        </select>
+        <span asp-validation-for="PhimId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Số Chỗ Ngồi:</label>
+        <input asp-for="SoChoNgoi" class="form-control" />
+        <span asp-validation-for="SoChoNgoi" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Tổng Thanh Toán:</label>
+        <input asp-for="TongThanhToan" class="form-control" />
+        <span asp-validation-for="TongThanhToan" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Tạo mới</button>
+</form>
+
+<a asp-action="Index">Quay lại</a>

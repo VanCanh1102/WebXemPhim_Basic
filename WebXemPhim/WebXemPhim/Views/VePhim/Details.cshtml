@@ -1,0 +1,31 @@
+﻿@model Libs.Entities.VePhim
+
+@{
+    ViewData["Title"] = "Chi Tiết Vé Phim";
+}
+
+<h2>Chi Tiết Vé Phim</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Thời Gian:</dt>
+        <dd class="col-sm-10">@Model.ThoiGian</dd>
+
+        <dt class="col-sm-2">Phòng Phim:</dt>
+        <dd class="col-sm-10">@Model.PhongPhimId</dd>
+
+        <dt class="col-sm-2">Khuyến Mãi:</dt>
+        <dd class="col-sm-10">@Model.KhuyenMaiGiaVeId</dd>
+
+        <dt class="col-sm-2">Phim:</dt>
+        <dd class="col-sm-10">@Model.PhimId</dd>
+
+        <dt class="col-sm-2">Số Chỗ Ngồi:</dt>
+        <dd class="col-sm-10">@Model.SoChoNgoi</dd>
+
+        <dt class="col-sm-2">Tổng Thanh Toán:</dt>
+        <dd class="col-sm-10">@Model.TongThanhToan</dd>
+    </dl>
+</div>
+
+<a asp-action="Index">Quay lại</a>

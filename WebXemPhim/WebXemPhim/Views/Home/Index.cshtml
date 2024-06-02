@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Libs.Entities.Phim>
+
+<h2>Phim List</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().TenPhim)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().NamSanXuat)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenPhim)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NamSanXuat)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a href="#" onclick="deletePhim(@item.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No tickets available.</p>
+}
+
+<a asp-action="Create">Create New</a>
+
+<script>
+    function deletePhim(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa bộ phim này không?")) {
+            $.ajax({
+                url: '@Url.Action("Delete", "Home")',
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    location.reload(); // Làm mới trang sau khi xóa thành công
+                },
+                error: function (xhr, status, error) {
+                    alert("Đã xảy ra lỗi khi xóa bộ phim.");
+                }
+            });
+        }
+    }
+
+</script>

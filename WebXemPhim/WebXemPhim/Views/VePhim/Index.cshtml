@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Libs.Entities.VePhim>
+
+
+@{
+    ViewData["Title"] = "Danh sách Vé Phim";
+}
+
+<h2>Danh sách Vé Phim</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Thời Gian
+                </th>
+                <th>
+                    Phòng Phim
+                </th>
+                <th>
+                    Khuyến Mãi
+                </th>
+                <th>
+                    Phim
+                </th>
+                <th>
+                    Số Chỗ Ngồi
+                </th>
+                <th>
+                    Tổng Thanh Toán
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGian)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhongPhimId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KhuyenMaiGiaVeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhimId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SoChoNgoi)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TongThanhToan)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a href="#" onclick="deletePhim(@item.Id)">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Không có vé phim nào.</p>
+}
+
+<a asp-action="Create">Tạo mới</a>
+<script>
+    function deletePhim(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa vé phim này không?")) {
+            $.ajax({
+                url: '@Url.Action("Delete", "VePhim")',
+                type: 'POST',
+                data: { id: id },
+                success: function (response) {
+                    location.reload(); // Làm mới trang sau khi xóa thành công
+                },
+                error: function (xhr, status, error) {
+                    alert("Đã xảy ra lỗi khi xóa vé phim.");
+                }
+            });
+        }
+    }
+
+</script>

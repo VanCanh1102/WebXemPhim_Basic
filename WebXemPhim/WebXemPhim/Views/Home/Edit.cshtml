@@ -1,0 +1,53 @@
+﻿@model Libs.ViewModels.PhimViewModel
+
+@{
+    ViewData["Title"] = "Edit Phim";
+}
+
+<h2>Edit Phim</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="TenPhim"></label>
+        <input asp-for="TenPhim" class="form-control" />
+        <span asp-validation-for="TenPhim" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TheLoaiPhimId"></label>
+        <select asp-for="TheLoaiPhimId" class="form-control" asp-items="@(new SelectList(Model.TheLoaiPhims, "Id", "TenTheLoaiPhim"))"></select>
+        <span asp-validation-for="TheLoaiPhimId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="HangSanXuatId"></label>
+        <select asp-for="HangSanXuatId" class="form-control" asp-items="@(new SelectList(Model.HangSanXuats, "Id", "TenHangSanXuat"))"></select>
+        <span asp-validation-for="HangSanXuatId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DaoDienId"></label>
+        <select asp-for="DaoDienId" class="form-control" asp-items="@(new SelectList(Model.DaoDiens, "Id", "HoTen"))"></select>
+        <span asp-validation-for="DaoDienId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NamSanXuat"></label>
+        <input asp-for="NamSanXuat" class="form-control" />
+        <span asp-validation-for="NamSanXuat" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
